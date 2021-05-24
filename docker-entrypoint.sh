@@ -14,18 +14,18 @@ ZONESERIAL=$(date +"%s")
 if [ -z "$MAGICSTRING" ]; then
   MAGICSTRING="1 ; SERIALAUTOUPDATE"
 fi
-
-if [ "$1" == "allzones" ]; then
-  log_info1 "acting on all *.zone files"
-  CHANGEDFILES="*.zone"
-elif [ -f .lasthash ]; then
-  LASTHASH=$(cat .lasthash)
-  log_info1 ".lasthash found: ${LASTHASH}"
-  CHANGEDFILES=$(git diff --name-only HEAD "$LASTHASH" -- '*.zone')
-else
-  log_info1 ".lasthash not found"
-  CHANGEDFILES=$(git diff --name-only HEAD HEAD~1 -- '*.zone')
-fi
+CHANGEDFILES="*.zone"
+# if [ "$1" == "allzones" ]; then
+#   log_info1 "acting on all *.zone files"
+#   CHANGEDFILES="*.zone"
+# elif [ -f .lasthash ]; then
+#   LASTHASH=$(cat .lasthash)
+#   log_info1 ".lasthash found: ${LASTHASH}"
+#   CHANGEDFILES=$(git diff --name-only HEAD "$LASTHASH" -- '*.zone')
+# else
+#   log_info1 ".lasthash not found"
+#   CHANGEDFILES=$(git diff --name-only HEAD HEAD~1 -- '*.zone')
+# fi
 
 rm -f .oldserials.new && touch .oldserials.new
 for file in $CHANGEDFILES; do

@@ -10,4 +10,4 @@ RUN apt-get update && apt-get install -y \
     git \
     rsync
 
-ENTRYPOINT ["/docker-entrypoint.sh allzones"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
