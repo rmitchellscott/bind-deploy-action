@@ -8,3 +8,4 @@
 README.md
 scripts
 _zonetemplate
+docker-entrypoint.sh
