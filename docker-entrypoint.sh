@@ -32,7 +32,7 @@ for file in $CHANGEDFILES; do
   # search for magic string - only do sed when found
   if grep -q "$MAGICSTRING" "$file"; then
     log_info2 "updating serial to $ZONESERIAL in $file"
-    sed -i "s/${MAGICSTRING}/${ZONESERIAL} : SERIAL/" "$file"
+    sed -i "s/${MAGICSTRING}/${ZONESERIAL} ; SERIAL/" "$file"
     echo "${file%.zone}: ${ZONESERIAL}" >> .oldserials.new
   else
     log_info2 "${MAGICSTRING} not found in ${file}"
