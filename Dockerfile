@@ -8,3 +8,4 @@ RUN apt-get update && apt-get install -y \
 ADD rsyncignore /etc/
 
 WORKDIR /zones
+ENTRYPOINT ["/docker-entrypoint.sh"]
