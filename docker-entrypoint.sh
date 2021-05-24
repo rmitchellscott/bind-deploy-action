@@ -80,7 +80,7 @@ else
   log_info2 "rsync to ${SSH_USER}@${NS_HIDDENMASTER}:${RSYNC_DEST_DIR} using a temporary SSH agent"
   eval "$(ssh-agent -s)" > /dev/null 2>&1
   ssh-add <(echo "$SSH_PRIVATE_KEY") > /dev/null 2>&1
-  mkdir -p ~/.ssh && echo -e "Host *\n\tStrictHostKeyChecking no\n\tLogLevel=quiet\n\n" > ~/.ssh/config
+  mkdir -p ~/.ssh && echo -e $SSH_CONFIG > ~/.ssh/config
   rsync $RSYNCPARAMS '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
   rc=$?; if [[ $rc != 0 ]]; then echo "rsync failed with $rc"; exit 1; fi
 fi
