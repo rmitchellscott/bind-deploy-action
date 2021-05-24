@@ -80,6 +80,7 @@ else
   log_info2 "rsync to ${SSH_USER}@${NS_HIDDENMASTER}:${RSYNC_DEST_DIR} using a temporary SSH agent"
   eval "$(ssh-agent -s)" > /dev/null 2>&1
   echo -e $SSH_CONFIG > /etc/ssh/ssh_config.d/NS_HIDDENMASTER.conf
+  mkdir /root/.ssh
   echo -e $SSH_PRIVATE_KEY > /root/.ssh/id_rsa
   chmod 600 /root/.ssh/id_rsa
   #rsync $RSYNCPARAMS '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
