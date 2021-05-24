@@ -79,15 +79,15 @@ elif [ -z "$SSH_PRIVATE_KEY" ]; then
 else
   log_info2 "rsync to ${SSH_USER}@${NS_HIDDENMASTER}:${RSYNC_DEST_DIR} using a temporary SSH agent"
   eval "$(ssh-agent -s)" > /dev/null 2>&1
-  ssh-add <(echo "$SSH_PRIVATE_KEY") > /dev/null 2>&1
   echo -e $SSH_CONFIG > /etc/ssh/ssh_config.d/NS_HIDDENMASTER.conf
+  echo -e $SSH_PRIVATE_KEY > /root/.ssh/id_rsa
+  chmod 600 /root/.ssh/id_rsa
   #rsync $RSYNCPARAMS '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
   rc=$?; if [[ $rc != 0 ]]; then echo "rsync failed with $rc"; exit 1; fi
 fi
 
 log_info2 "Reloading all zones with rndc"
-echo $SSH_USER
-#ssh "$SSH_USER"@"$NS_HIDDENMASTER" 'echo "$(whoami) : $HOSTNAME"' -v
+ssh "$SSH_USER"@"$NS_HIDDENMASTER" 'echo "$(whoami) : $HOSTNAME"'
 #ssh "$SSH_USER"@"$NS_HIDDENMASTER" sudo rndc reload
 
 # save current hash for later execution
