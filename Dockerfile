@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY ./docker-entrypoint.sh zones/
 
-RUN chmod +x /docker-entrypoint.sh
+RUN chmod +x /zones/docker-entrypoint.sh
 ADD rsyncignore /etc/
 
 WORKDIR /zones
