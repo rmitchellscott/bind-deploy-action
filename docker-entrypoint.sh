@@ -9,7 +9,6 @@ log_info2() {
   echo "=====> $*"
 }
 
-cd zones/
 ZONESERIAL=$(date +"%s")
 if [ -z "$MAGICSTRING" ]; then
   MAGICSTRING="1 ; SERIALAUTOUPDATE"
@@ -24,6 +23,9 @@ elif [ -f .lasthash ]; then
 else
   log_info1 ".lasthash not found"
   CHANGEDFILES=$(git diff --name-only HEAD HEAD~1 -- '*.zone')
+  if [ $? -ne 0 ]; then
+    log_info1 "No zone changes found in last git commit"
+  fi
 fi
 
 rm -f .oldserials.new && touch .oldserials.new
@@ -82,7 +84,7 @@ else
   mkdir /root/.ssh
   echo -e $SSH_PRIVATE_KEY > /root/.ssh/id_rsa
   chmod 600 /root/.ssh/id_rsa
-  rsync $RSYNCPARAMS --rsync-path="sudo rsync" '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
+  rsync $RSYNCPARAMS --rsync-path="sudo rsync" 'zones/' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
   rc=$?; if [[ $rc != 0 ]]; then echo "rsync failed with $rc"; exit 1; fi
 fi
 
