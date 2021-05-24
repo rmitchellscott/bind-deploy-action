@@ -81,7 +81,6 @@ else
   eval "$(ssh-agent -s)" > /dev/null 2>&1
   ssh-add <(echo "$SSH_PRIVATE_KEY") > /dev/null 2>&1
   echo -e $SSH_CONFIG > /etc/ssh/ssh_config.d/NS_HIDDENMASTER.conf
-  cat ~/.ssh/config
   #rsync $RSYNCPARAMS '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
   rc=$?; if [[ $rc != 0 ]]; then echo "rsync failed with $rc"; exit 1; fi
 fi
