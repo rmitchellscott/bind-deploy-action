@@ -87,7 +87,8 @@ else
 fi
 
 log_info2 "Reloading all zones with rndc"
-ssh "$SSH_USER"@"$NS_HIDDENMASTER" sudo rndc reload
+ssh "$SSH_USER"@"$NS_HIDDENMASTER" -v
+#ssh "$SSH_USER"@"$NS_HIDDENMASTER" sudo rndc reload
 
 # save current hash for later execution
 log_info1 "Saving ${CURRENTHASH} in .lasthash"
