@@ -6,6 +6,7 @@ log_info1() {
 log_info2() {
   echo "=====> $*"
 }
+cd zones
 
 ZONESERIAL=$(date +"%s")
 if [ -z "$MAGICSTRING" ]; then
