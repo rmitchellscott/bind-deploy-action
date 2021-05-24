@@ -57,7 +57,7 @@ mv -f .oldserials.new .oldserials
 ## Initialize
 CURRENTHASH=$(git rev-parse HEAD)
 FINALRC=0
-RSYNCPARAMS="--itemize-changes --verbose --human-readable --times --checksum --recursive --delete --exclude-from=/etc/rsyncignore --delete-excluded --rsync-path=\"sudo rsync\""
+RSYNCPARAMS="--itemize-changes --verbose --human-readable --times --checksum --recursive --delete --exclude-from=/etc/rsyncignore --delete-excluded"
 
 log_info1 "Deploying zonefiles to hidden master"
 
@@ -83,7 +83,7 @@ else
   mkdir /root/.ssh
   echo -e $SSH_PRIVATE_KEY > /root/.ssh/id_rsa
   chmod 600 /root/.ssh/id_rsa
-  rsync $RSYNCPARAMS '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
+  rsync $RSYNCPARAMS --rsync-path="sudo rsync" '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
   rc=$?; if [[ $rc != 0 ]]; then echo "rsync failed with $rc"; exit 1; fi
 fi
 
