@@ -83,13 +83,12 @@ else
   mkdir /root/.ssh
   echo -e $SSH_PRIVATE_KEY > /root/.ssh/id_rsa
   chmod 600 /root/.ssh/id_rsa
-  #rsync $RSYNCPARAMS '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
+  rsync $RSYNCPARAMS '.' "$SSH_USER"@"$NS_HIDDENMASTER":"$RSYNC_DEST_DIR"
   rc=$?; if [[ $rc != 0 ]]; then echo "rsync failed with $rc"; exit 1; fi
 fi
 
 log_info2 "Reloading all zones with rndc"
-ssh "$SSH_USER"@"$NS_HIDDENMASTER" 'echo "$(whoami) : $HOSTNAME"'
-#ssh "$SSH_USER"@"$NS_HIDDENMASTER" sudo rndc reload
+ssh "$SSH_USER"@"$NS_HIDDENMASTER" sudo rndc reload
 
 # save current hash for later execution
 log_info1 "Saving ${CURRENTHASH} in .lasthash"
