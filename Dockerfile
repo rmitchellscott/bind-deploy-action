@@ -5,10 +5,10 @@ RUN apt-get update && apt-get install -y \
     git \
     rsync
 
-COPY ./docker-entrypoint.sh zones/
+COPY docker-entrypoint.sh zones/
 
 RUN chmod +x zones/docker-entrypoint.sh
 ADD rsyncignore /etc/
 
 WORKDIR /zones
-ENTRYPOINT ["./docker-entrypoint.sh"]
+ENTRYPOINT ["zones/docker-entrypoint.sh"]
