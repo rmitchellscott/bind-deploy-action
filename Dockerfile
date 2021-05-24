@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
     git \
     rsync
 
-COPY ./docker-entrypoint.sh .
+COPY ./docker-entrypoint.sh zones/
 
 RUN chmod +x /docker-entrypoint.sh
 ADD rsyncignore /etc/
