@@ -67,7 +67,9 @@ fi
 if [ -z "$RSYNC_DEST_DIR" ]; then
   RSYNC_DEST_DIR="zones"
 fi
-
+if [ -z "$SSH_CONFIG" ]; then
+  SSH_CONFIG="Host *\n\tStrictHostKeyChecking no\n\tLogLevel=quiet\n\n"
+fi
 if [ -z "$NS_HIDDENMASTER" ]; then
   echo "FAILED - NS_HIDDENMASTER not set - don't know where to sync to"
   exit 1
@@ -84,7 +86,7 @@ else
 fi
 
 log_info2 "Reloading all zones with rndc"
-ssh "$SSH_USER"@"$NS_HIDDENMASTER" rndc reload
+ssh "$SSH_USER"@"$NS_HIDDENMASTER" sudo rndc reload
 
 # save current hash for later execution
 log_info1 "Saving ${CURRENTHASH} in .lasthash"
