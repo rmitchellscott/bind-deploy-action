@@ -3,6 +3,9 @@ set -euo pipefail
 
 echo `pwd`
 echo `ls`
+cd zones/
+echo `pwd`
+echo `ls`
 # log_info1() {
 #   echo "-----> $*"
 # }
