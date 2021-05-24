@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 COPY . .
-
+COPY rsyncignore /etc/
 RUN chmod +x /docker-entrypoint.sh
 
 ARG DEBIAN_FRONTEND=noninteractive
