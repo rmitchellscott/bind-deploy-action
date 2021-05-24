@@ -57,7 +57,7 @@ mv -f .oldserials.new .oldserials
 ## Initialize
 CURRENTHASH=$(git rev-parse HEAD)
 FINALRC=0
-RSYNCPARAMS="--itemize-changes --verbose --human-readable --times --checksum --recursive --delete --exclude-from=/etc/rsyncignore --delete-excluded --rsync-path='sudo rsync'"
+RSYNCPARAMS="--itemize-changes --verbose --human-readable --times --checksum --recursive --delete --exclude-from=/etc/rsyncignore --delete-excluded --rsync-path="sudo rsync""
 
 log_info1 "Deploying zonefiles to hidden master"
 
