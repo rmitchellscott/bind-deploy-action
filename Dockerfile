@@ -1,9 +1,6 @@
-FROM gliderlabs/alpine:latest
+FROM ubuntu:latest
 
-RUN apk-install \
-    bash \
-    bind \
-    bind-tools \
+RUN apt-get update && apt-get install -y \
     openssh-client \
     git \
     rsync
