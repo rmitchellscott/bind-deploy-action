@@ -87,7 +87,7 @@ else
 fi
 
 log_info2 "Reloading all zones with rndc"
-ssh "$SSH_USER"@"$NS_HIDDENMASTER" -v
+ssh "$SSH_USER"@"$NS_HIDDENMASTER" 'echo "$(whoami) : $HOSTNAME"' -v
 #ssh "$SSH_USER"@"$NS_HIDDENMASTER" sudo rndc reload
 
 # save current hash for later execution
