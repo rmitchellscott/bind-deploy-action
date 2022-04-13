@@ -8,6 +8,7 @@ log_info1() {
 log_info2() {
   echo "=====> $*"
 }
+git config --global --add safe.directory /github/workspace
 cd zones/
 ZONESERIAL=$(date +"%s")
 if [ -z "$MAGICSTRING" ]; then
